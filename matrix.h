@@ -9,8 +9,8 @@
 struct matrix{
     double array[MAX_SIZE_OF_MATRIX][MAX_SIZE_OF_MATRIX];
     int size;
-    int sizeX;
-    int sizeY;
+    int sizeX = 0;
+    int sizeY = 0;
 
 };
 

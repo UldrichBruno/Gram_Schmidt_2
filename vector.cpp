@@ -36,3 +36,12 @@ struct vector readVector(int size, string path) {
     inFile.close();
     return v;
 }
+
+struct matrix addVectorToMatrix(struct matrix m, struct vector v) {
+    m.sizeX++;
+    m.sizeY = v.size;
+    for (int i = 0; i < v.size; i++) {
+
+    }
+
+}

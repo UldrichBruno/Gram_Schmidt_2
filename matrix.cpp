@@ -14,6 +14,8 @@ using namespace std;
 struct matrix readMatrix(int size, string path1) {
     struct matrix a;
     a.size = size;
+    a.sizeX = size;
+    a.sizeY = size;
     int x;
     ifstream inFile;
     inFile.open(path1);
@@ -96,15 +98,15 @@ struct matrix moveLine(struct matrix a, int lineReadHead) {
 struct matrix UTM(struct matrix a) {             // Upper-triangular-matrix function.
     int numOfLoops = 0;
     Start:
-    for (int i = 0; i < a.size; i++) {         // ReadHead
+    for (int i = 0; i < a.sizeX; i++) {         // ReadHead
         if (check(a, i, i) == 1) {
-            for (int j = i + 1; j < a.size; j++) {    //NullHead.
+            for (int j = i + 1; j < a.sizeY; j++) {    //NullHead.
                 double coef = findCoef(a, j, i);
                 a = zeroingElement(a, j, i, coef);
             }
         } else {
             numOfLoops++;
-            if (checkSingular(numOfLoops, a.size) == 1) {
+            if (checkSingular(numOfLoops, a.sizeX) == 1) {
                 a = moveLine(a, i);
                 goto Start;
             } else{

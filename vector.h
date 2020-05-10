@@ -8,8 +8,11 @@ struct vector{
     int size;
 };
 
+
+
 void printVector(struct inputVector );
 struct vector readVector(int size, std::string path);
+
 
 
 

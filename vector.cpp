@@ -1,5 +1,6 @@
 
 #include "vector.h"
+#include "matrix.h"
 #include <string>
 #include <fstream>
 #include <iostream>
@@ -35,4 +36,3 @@ struct vector readVector(int size, string path) {
     inFile.close();
     return v;
 }
-

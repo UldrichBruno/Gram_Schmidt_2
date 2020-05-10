@@ -3,6 +3,7 @@
 
 
 
+
 #define MAX_SIZE_OF_MATRIX 50
 
 struct matrix{
@@ -20,4 +21,5 @@ struct matrix UTM(struct matrix a);                         // Reduce the matrix
 bool checkMatrix(struct matrix a);
 double subdeterminant(struct matrix a);
 double cofactor(struct matrix a, int y, int x);
+
 #endif

@@ -11,6 +11,7 @@ struct matrix{
     int size;
     int sizeX = 0;
     int sizeY = 0;
+    struct vector vector[MAX_SIZE_OF_VECTOR];
 
 };
 

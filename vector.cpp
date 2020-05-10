@@ -36,13 +36,8 @@ struct vector readVector(int size, string path) {
     return v;
 }
 
-struct matrix addVectorToMatrix(struct matrix m, struct vector v) {
-    m.sizeX++;
-    m.sizeY = v.size;
-    for (int i = 0; i < v.size; i++) {
-        m.array[m.sizeX][i] = v.array[i];
-    }
-}
+
+
 
 struct matrix readGeneralMatrix(int size, string path) {
     struct matrix a;
@@ -60,6 +55,7 @@ struct matrix readGeneralMatrix(int size, string path) {
     while (inFile >> x) {
 
         a.array[j][i] = x;
+        a.vector[i].array[j] = x;
         if(j >= a.sizeX - 1){
             i++;
             j = 0;

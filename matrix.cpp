@@ -1,12 +1,12 @@
 //
 // Created by Uzivatel on 10.05.2020.
 //
-
+#include "matrix.h"
+#include "vector.h"
 #include <string>
 #include <fstream>
 #include <iostream>
 #include <iomanip>
-#include "matrix.h"
 #include <cmath>
 
 using namespace std;

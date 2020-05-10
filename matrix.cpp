@@ -38,8 +38,8 @@ struct matrix readMatrix(int size, string path1) {
 }
 
 void printMatrix(struct matrix a) {
-    for (int i = 0; i < a.size; i++) {
-        for (int j = 0; j < a.size; j++) {
+    for (int i = 0; i < a.sizeX; i++) {
+        for (int j = 0; j < a.sizeY; j++) {
             cout << setw(7) << setprecision(3) << a.array[i][j] << " ";
         }
         cout << endl;

@@ -39,6 +39,7 @@ int main() {
 
         struct matrix givenMatrix = readGeneralMatrix(inputDIM, path1);
         printMatrix(givenMatrix);
+        printMatrix(UTM(givenMatrix));
 
-        cout << checkMatrix(UTM(givenMatrix));
+     //   cout << checkMatrix(UTM(givenMatrix));
 }

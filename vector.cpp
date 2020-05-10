@@ -1,3 +1,4 @@
+
 #include "vector.h"
 #include <string>
 #include <fstream>
@@ -34,3 +35,4 @@ struct vector readVector(int size, string path) {
     inFile.close();
     return v;
 }
+

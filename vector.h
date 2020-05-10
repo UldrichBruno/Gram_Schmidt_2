@@ -13,5 +13,4 @@ struct vector readVector(int size, std::string path);
 
 
 
-
 #endif

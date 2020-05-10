@@ -36,9 +36,6 @@ struct vector readVector(int size, string path) {
     return v;
 }
 
-
-
-
 struct matrix readGeneralMatrix(int size, string path) {
     struct matrix a;
     a.size = size;
@@ -57,6 +54,7 @@ struct matrix readGeneralMatrix(int size, string path) {
         a.array[j][i] = x;
         a.vector[i].array[j] = x;
         if(j >= a.sizeX - 1){
+            a.vector[i].size = a.sizeX;
             i++;
             j = 0;
         }
@@ -69,4 +67,17 @@ struct matrix readGeneralMatrix(int size, string path) {
 
     return a;
 
+}
+
+struct matrix checkLN(struct matrix a){
+   int b = 0;
+    for(int i = 0; i < a.sizeY; i++){
+        a.vector[i - b] = a.vector[i];
+        if(a.array[i][i] == 0){
+            b++;
+        }
+
+    }
+    a.sizeY = a.sizeY - b;
+    return a;
 }

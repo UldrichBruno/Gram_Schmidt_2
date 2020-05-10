@@ -18,7 +18,6 @@ double dotProduct(struct matrix givenMatrix, struct vector whichOneLeft, struct 
         product = product + c;
     }
     return product;
-
 }
 
 double sum(struct matrix givenMatrix, struct vector insteadOf, struct vector theOneBefore, int whichOne){
@@ -38,7 +37,7 @@ double sum(struct matrix givenMatrix, struct vector insteadOf, struct vector the
 struct vector Gram_Schmidt(struct matrix givenMatrix, struct vector insteadOf, struct vector theOneBefore, int whichOne){
     struct vector whichOneGet;
     for (int i = 1; i < whichOne; i++) {
-        whichOneGet.array[i] = insteadOf.array[i] - sum(givenMatrix, insteadOf, theOneBefore);
+        whichOneGet.array[i] = insteadOf.array[i] - sum(givenMatrix, insteadOf, theOneBefore, i);
     }
     return whichOneGet;
 

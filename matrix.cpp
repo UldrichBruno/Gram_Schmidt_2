@@ -87,7 +87,7 @@ struct matrix moveLine(struct matrix a, int lineReadHead) {
 
 }
 
-struct matrix UTM(struct matrix a) {             // Upper-triangular-matrix function.
+struct matrix UTM(struct matrix a, bool interuptOn) {             // Upper-triangular-matrix function.
     int numOfLoops = 0;
     Start:
     for (int i = 0; i < a.sizeY; i++) {         // ReadHead
@@ -104,8 +104,12 @@ struct matrix UTM(struct matrix a) {             // Upper-triangular-matrix func
                 a = moveLine(a, i);
                 goto Start;
             } else{
-                cout << "Given matrix is singular!" << endl;
-                exit(2);
+                if(interuptOn){
+                    cout << "Given matrix is singular!" << endl;
+                    exit(2);
+                } else{
+                    return a;
+                }
             }
         }
     }

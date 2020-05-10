@@ -11,6 +11,8 @@ struct vector{
 
 
 
+
+
 void printVector(struct inputVector );
 struct vector readVector(int size, std::string path);
 struct matrix addVectorToMatrix(struct matrix m, struct vector v);

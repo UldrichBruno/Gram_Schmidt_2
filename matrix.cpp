@@ -116,11 +116,23 @@ struct matrix UTM(struct matrix a) {             // Upper-triangular-matrix func
     return a;
 }
 
-double determinant(struct matrix a){
+double determinant(struct matrix UTMMatrix){
     double det = 1;
-    for (int i = 0; i < a.size; i++){
-        det = det * a.array[i][i];
+    for (int i = 0; i < UTMMatrix.size; i++){
+        det = det * UTMMatrix.array[i][i];
     }
     return det;
+}
 
+bool checkMatrix(struct matrix UTMMatrix){
+    double subdet ;
+    for(int j = 0; j < UTMMatrix.size; j++){
+        for (int i = 0; i < j; i++){
+            subdet = subdet * UTMMatrix.array[i][i];
+            if(subdet<0){
+                return false;
+            }
+        }
+        return true;
+    }
 }

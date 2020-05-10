@@ -3,6 +3,7 @@
 
 
 
+
 #define MAX_SIZE_OF_MATRIX 50
 
 struct matrix{
@@ -18,4 +19,5 @@ bool checkMatrix(struct matrix givenMatrix);
 std::struct matrix UTM(struct matrix a);                         // Reduce the matrix to an upper triangular matrix.
 double determinant(struct matrix a);
 double cofactor(struct matrix a, int y, int x);
+
 #endif

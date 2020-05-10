@@ -14,8 +14,6 @@ using namespace std;
 struct matrix readMatrix(int size, string path1) {
     struct matrix a;
     a.size = size;
-    a.sizeX = size;
-    a.sizeY = size;
     int x;
     ifstream inFile;
     inFile.open(path1);
@@ -48,12 +46,6 @@ void printMatrix(struct matrix a) {
 
 }
 
-bool checkMatrix(struct matrix givenMatrix){
-    for(int i = 0; i < givenMatrix.size; i++){
-        determinant(givenMatrix);
-    }
-}
-
 bool check(struct matrix a, int line, int col) {            //Catches zeroes to lead the function UTM to success.
 
     return a.array[line][col] != 0;
@@ -61,11 +53,11 @@ bool check(struct matrix a, int line, int col) {            //Catches zeroes to 
 }
 
 bool checkSingular(int numOfSteps, int inputDIM){
-    return numOfSteps < inputDIM + 3;
+    return numOfSteps < inputDIM + 10;
 }
 
 struct matrix zeroingElement(struct matrix a, int lineNullHead, int lineReadHead, double coef) {            // Makes zeroes under the main diagonal.
-    for (int i = 0; i < a.size; i++) {
+    for (int i = 0; i < a.sizeY; i++) {
         a.array[lineNullHead][i] = a.array[lineNullHead][i] + a.array[lineReadHead][i] * coef;
     }
     return a;
@@ -78,18 +70,18 @@ double findCoef(struct matrix a, int lineNullHead, int lineReadHead) {          
 
 struct matrix moveLine(struct matrix a, int lineReadHead) {
     double opmatrix[MAX_SIZE_OF_MATRIX];
-    for (int k = 0; k < a.size; k++) {
+    for (int k = 0; k < a.sizeY; k++) {
         opmatrix[k] = a.array[lineReadHead][k];
     }
 
-    for (int i = lineReadHead; i < a.size; i++) {
-        for (int k = 0; k < a.size; k++) {
+    for (int i = lineReadHead; i < a.sizeX; i++) {
+        for (int k = 0; k < a.sizeY; k++) {
             a.array[i][k] = a.array[i + 1][k];
         }
     }
 
-    for (int k = 0; k < a.size; k++) {
-        a.array[a.size - 1][k] = opmatrix[k];
+    for (int k = 0; k < a.sizeY; k++) {
+        a.array[a.sizeX - 1][k] = opmatrix[k];
     }
     return a;
 
@@ -98,11 +90,13 @@ struct matrix moveLine(struct matrix a, int lineReadHead) {
 struct matrix UTM(struct matrix a) {             // Upper-triangular-matrix function.
     int numOfLoops = 0;
     Start:
-    for (int i = 0; i < a.sizeX; i++) {         // ReadHead
+    for (int i = 0; i < a.sizeY; i++) {         // ReadHead
+        printMatrix(a);
         if (check(a, i, i) == 1) {
-            for (int j = i + 1; j < a.sizeY; j++) {    //NullHead.
+            for (int j = i + 1; j < a.sizeX; j++) {    //NullHead.
                 double coef = findCoef(a, j, i);
                 a = zeroingElement(a, j, i, coef);
+                printMatrix(a);
             }
         } else {
             numOfLoops++;

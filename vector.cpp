@@ -1,4 +1,3 @@
-
 #include "vector.h"
 #include "matrix.h"
 #include <string>
@@ -14,7 +13,7 @@ void printVector(struct vector v) {
             cout << setw(7) << setprecision(3) << v.array[i]<< " ";
         }
         cout << endl;
-    cout <<"--------------------------------------------------"<< endl;
+     cout << "--------------------------------------------------" << endl;
 }
 
 struct vector readVector(int size, string path) {
@@ -41,14 +40,14 @@ struct matrix addVectorToMatrix(struct matrix m, struct vector v) {
     m.sizeX++;
     m.sizeY = v.size;
     for (int i = 0; i < v.size; i++) {
-        m.array[sizeX][i] = v.array[i];
+        m.array[m.sizeX][i] = v.array[i];
     }
 }
 
 struct matrix readGeneralMatrix(int size, string path) {
     struct matrix a;
     a.size = size;
-    a.sizeY = size;
+    a.sizeX = size;
     int x;
     ifstream inFile;
     inFile.open(path);
@@ -57,13 +56,19 @@ struct matrix readGeneralMatrix(int size, string path) {
         exit(1); // terminate with error
     }
     int i = 0;
+    int j = 0;
     while (inFile >> x) {
-        i++;
-        for (int j = 0; j < a.sizeY; j++) {
-            a.array[i][j] = x;
-            inFile >> x;
+
+        a.array[j][i] = x;
+        if(j >= a.sizeX - 1){
+            i++;
+            j = 0;
+        }
+        else {
+        j++;
         }
     }
+    a.sizeY = i;
     inFile.close();
 
     return a;

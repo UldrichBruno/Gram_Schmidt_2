@@ -21,13 +21,13 @@ double dotProduct(struct matrix givenMatrix, struct vector whichOneLeft, struct 
 
 }
 
-double sum(struct matrix givenMatrix, struct vector insteadOf, struct vector theOneBefore){
+double sum(struct matrix givenMatrix, struct vector insteadOf, struct vector theOneBefore, int whichOne){
     double dotProd = 0;
     double norm = 0;
     double partial = 0;
     dotProd = dotProduct(givenMatrix, insteadOf, theOneBefore);
     norm = dotProduct(givenMatrix, theOneBefore, theOneBefore);
-    for (int i = 0; i < k; i++){
+    for (int i = 0; i < whichOne - 1; i++){
         double e = (dotProd * theOneBefore.array[i])/(norm * norm);
         partial = partial + e;
     }
@@ -35,9 +35,9 @@ double sum(struct matrix givenMatrix, struct vector insteadOf, struct vector the
 
 }
 
-struct vector Gram_Schmidt(struct matrix givenMatrix, struct vector insteadOf, struct vector theOneBefore){
+struct vector Gram_Schmidt(struct matrix givenMatrix, struct vector insteadOf, struct vector theOneBefore, int whichOne){
     struct vector whichOneGet;
-    for (int i = 0; i < k; i++) {
+    for (int i = 1; i < whichOne; i++) {
         whichOneGet.array[i] = insteadOf.array[i] - sum(givenMatrix, insteadOf, theOneBefore);
     }
     return whichOneGet;

@@ -51,7 +51,7 @@ struct matrix readGeneralMatrix(int size, string path) {
     a.sizeY = size;
     int x;
     ifstream inFile;
-    inFile.open(path1);
+    inFile.open(path);
     if (!inFile.is_open()) {
         cout << "Unable to open file";
         exit(1); // terminate with error

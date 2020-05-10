@@ -58,138 +58,69 @@ bool check(struct matrix a, int line, int col) {            //Catches zeroes to 
 
 }
 
-
-
 bool checkSingular(int numOfSteps, int inputDIM){
-
     return numOfSteps < inputDIM + 3;
-
 }
-
-
 
 struct matrix zeroingElement(struct matrix a, int lineNullHead, int lineReadHead, double coef) {            // Makes zeroes under the main diagonal.
-
     for (int i = 0; i < a.size; i++) {
-
         a.array[lineNullHead][i] = a.array[lineNullHead][i] + a.array[lineReadHead][i] * coef;
-
     }
-
     return a;
-
 }
-
-
 
 double findCoef(struct matrix a, int lineNullHead, int lineReadHead) {                  // Finds a coefficient, which multiplies a number on the main diagonal to annul numbers below.
-
     double coef;
-
     return coef = (-1 * (a.array[lineNullHead][lineReadHead] / a.array[lineReadHead][lineReadHead]));
-
 }
-
-
-
-
 
 struct matrix moveLine(struct matrix a, int lineReadHead) {
-
-
-
     double opmatrix[MAX_SIZE_OF_MATRIX];
-
-
-
     for (int k = 0; k < a.size; k++) {
-
         opmatrix[k] = a.array[lineReadHead][k];
-
     }
-
-
 
     for (int i = lineReadHead; i < a.size; i++) {
-
         for (int k = 0; k < a.size; k++) {
-
             a.array[i][k] = a.array[i + 1][k];
-
         }
-
     }
-
-
 
     for (int k = 0; k < a.size; k++) {
-
         a.array[a.size - 1][k] = opmatrix[k];
-
     }
-
     return a;
 
 }
-
-
 
 struct matrix UTM(struct matrix a) {             // Upper-triangular-matrix function.
-
     int numOfLoops = 0;
-
     Start:
-
     for (int i = 0; i < a.size; i++) {         // ReadHead
-
         if (check(a, i, i) == 1) {
-
             for (int j = i + 1; j < a.size; j++) {    //NullHead.
-
                 double coef = findCoef(a, j, i);
-
                 a = zeroingElement(a, j, i, coef);
-
             }
-
         } else {
-
             numOfLoops++;
-
             if (checkSingular(numOfLoops, a.size) == 1) {
-
                 a = moveLine(a, i);
-
                 goto Start;
-
             } else{
-
                 cout << "Given matrix is singular!" << endl;
-
                 exit(2);
-
             }
-
         }
-
     }
-
     return a;
-
 }
 
-
-
 double determinant(struct matrix a){
-
     double det = 1;
-
     for (int i = 0; i < a.size; i++){
-
         det = det * a.array[i][i];
-
     }
-
     return det;
 
 }

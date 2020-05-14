@@ -45,7 +45,7 @@ struct matrix readGeneralMatrix(int size, string path) {
     inFile.open(path);
     if (!inFile.is_open()) {
         cout << "Unable to open file";
-        exit(1);
+        exit(2);
     }
     int i = 0;
     int j = 0;
@@ -92,6 +92,7 @@ struct vector vectorAddVector(struct vector a, struct vector b){
         return c;
     }
     else {
+        cout << "There are vectors with another number of segments!" << endl;
         exit(3);
     }
 }

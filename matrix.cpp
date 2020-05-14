@@ -21,7 +21,7 @@ struct matrix readMatrix(int size, string path1) {
     inFile.open(path1);
     if (!inFile.is_open()) {
         cout << "Unable to open file";
-        exit(2); // terminate with error
+        exit(4); // terminate with error
     }
     while (inFile >> x) {
         for (int i = 0; i < a.size; i++) {
@@ -104,7 +104,7 @@ struct matrix UTM(struct matrix a, bool interuptOn) {   // Upper-triangular-matr
             } else{
                 if(interuptOn){
                     cout << "Given matrix is singular!" << endl;
-                    exit(4);
+                    exit(5);
                 } else{
                     return a;
                 }

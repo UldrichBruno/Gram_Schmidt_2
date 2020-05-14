@@ -45,7 +45,7 @@ struct matrix readGeneralMatrix(int size, string path) {
     inFile.open(path);
     if (!inFile.is_open()) {
         cout << "Unable to open file";
-        exit(1); // terminate with error
+        exit(1);
     }
     int i = 0;
     int j = 0;
@@ -80,4 +80,27 @@ struct matrix checkLN(struct matrix a){
     }
     a.sizeY = a.sizeY - b;
     return a;
+}
+
+struct vector vectorAddVector(struct vector a, struct vector b){
+    struct vector c;
+    if(a.size == b.size){
+        c.size = a.size;
+        for (int i = 0; i < a.size; ++i) {
+            c.array[i] = a.array[i] + b.array[i];
+        }
+        return c;
+    }
+    else {
+        exit(3);
+    }
+}
+
+struct vector scalaeMultiplVector(struct vector a, double b){
+    struct vector c;
+    c.size = a.size;
+    for (int i = 0; i < a.size; ++i) {
+        c.array[i] = a.array[i] * b;
+    }
+    return c;
 }

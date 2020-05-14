@@ -6,45 +6,39 @@
 using namespace std;
 
 int main() {
-        int numOfVectors;
-        int inputDIM;
+    int inputDIM;
 
-        string path1 = "C:/Users/Uzivatel/CLionProjects3/Hledani_inverzni_matice/matrix.txt";        // Example: C:/Users/Uzivatel/CLionProjects3/Hledani_inverzni_matice/matrix.txt
-        string path2 = "C:/Users/Uzivatel/CLionProjects2/inverze_adj/vector.txt";        // Example: C:/Users/Uzivatel/CLionProjects2/inverze_adj/vector.txt
+    string path1;   // Example: C:/Users/Uzivatel/CLionProjects3/Hledani_inverzni_matice/matrix.txt
+    string path2;   // Example: C:/Users/Uzivatel/CLionProjects2/inverze_adj/vector.txt
 
-        cout << "Welcome to program which find an Orthogonal base of given vectors from C^n." << endl;
-        cout << "Please, enter your vectors with n složky (max n samples). Otherwise this program will work badly." << endl;
-        cout << "Input dimension of space:" << endl;
-        cin >> inputDIM;
+    cout << "Welcome to program which find an Orthogonal base of given vectors from R^n." << endl;
+    cout << "Input dimension of space:" << endl;
+    cin >> inputDIM;
+    cout
+            << "Please, input path to your matrix of the dot product. Keep in mind, the matrix has to be symmetrical! Otherwise this program will work badly."
+            << endl;
+    cin >> path1;
+    cout << "Please, enter path to find your vectors with n components. Otherwise this program will work badly."
+         << endl;
+    cin >> path2;
     struct matrix givenVectors = readGeneralMatrix(inputDIM, path2);
     struct matrix givenMatrix = readMatrix(inputDIM, path1);
-    if(!checkMatrix(UTM(givenMatrix, true))){
+    if (!checkMatrix(UTM(givenMatrix, true))) {
         cout << "Given matrix is not positive definite." << endl;
         exit(3);
     }
-     givenVectors = checkLN(UTM(givenVectors, false));
-    for(int i = 0; i < givenVectors.sizeY; i++){
+    cout << "Here is the given matrix:" << endl;
+    printMatrix(givenMatrix);
+    cout << "Here are the given vectors, which were linear independent:" <<endl;
+    givenVectors = checkLN(UTM(givenVectors, false));
+    for (int i = 0; i < givenVectors.sizeY; i++) {
         printVector(givenVectors.vector[i]);
     }
+    cout << "This is your Orthogonal base:" << endl;
 
-    struct vector result[MAX_SIZE_OF_MATRIX];
-    result[0] = givenVectors.vector[0];
-    for(int i =1; i < givenVectors.sizeY; i++){
-        result[i] = Gram_Schmidt(givenMatrix, givenVectors.vector[i], givenVectors.vector[i-1], i);
+    struct matrix result = GramSchmidt(givenMatrix, givenVectors);
+
+    for (int i = 0; i < result.sizeY; i++) {
+        printVector(result.vector[i]);
     }
-    for(int i = 0; i < givenVectors.sizeY; i++){
-        printVector(result[i]);
-    }
-
-      //  cout << "" << endl;
-     //   cout << "Your matrix: " << endl;
-
-
-   //     printMatrix(givenMatrix);
-    //    printMatrix(UTM(givenMatrix));
-
-
-
-
-     //   cout << checkMatrix(UTM(givenMatrix));
 }

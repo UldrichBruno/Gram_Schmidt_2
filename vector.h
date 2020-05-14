@@ -18,7 +18,8 @@ struct vector readVector(int size, std::string path);
 struct matrix addVectorToMatrix(struct matrix m, struct vector v);
 struct matrix readGeneralMatrix(int size, std::string path);
 struct matrix checkLN(struct matrix a);
-
+struct vector vectorAddVector(struct vector a, struct vector b);
+struct vector scalaeMultiplVector(struct vector a, double b);
 
 
 #endif

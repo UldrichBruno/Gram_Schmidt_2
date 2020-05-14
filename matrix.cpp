@@ -14,12 +14,14 @@ using namespace std;
 struct matrix readMatrix(int size, string path1) {
     struct matrix a;
     a.size = size;
+    a.sizeY = size;
+    a.sizeX = size;
     int x;
     ifstream inFile;
     inFile.open(path1);
     if (!inFile.is_open()) {
         cout << "Unable to open file";
-        exit(1); // terminate with error
+        exit(2); // terminate with error
     }
     while (inFile >> x) {
         for (int i = 0; i < a.size; i++) {
@@ -46,24 +48,22 @@ void printMatrix(struct matrix a) {
 
 }
 
-bool check(struct matrix a, int line, int col) {            //Catches zeroes to lead the function UTM to success.
-
+bool check(struct matrix a, int line, int col) {    //Catches zeroes to lead the function UTM to success.
     return a.array[line][col] != 0;
-
 }
 
 bool checkSingular(int numOfSteps, int inputDIM){
     return numOfSteps < inputDIM + 10;
 }
 
-struct matrix zeroingElement(struct matrix a, int lineNullHead, int lineReadHead, double coef) {            // Makes zeroes under the main diagonal.
+struct matrix zeroingElement(struct matrix a, int lineNullHead, int lineReadHead, double coef) {    // Makes zeroes under the main diagonal.
     for (int i = 0; i < a.sizeY; i++) {
         a.array[lineNullHead][i] = a.array[lineNullHead][i] + a.array[lineReadHead][i] * coef;
     }
     return a;
 }
 
-double findCoef(struct matrix a, int lineNullHead, int lineReadHead) {                  // Finds a coefficient, which multiplies a number on the main diagonal to annul numbers below.
+double findCoef(struct matrix a, int lineNullHead, int lineReadHead) {  // Finds a coefficient, which multiplies a number on the main diagonal to annul numbers below.
     double coef;
     return coef = (-1 * (a.array[lineNullHead][lineReadHead] / a.array[lineReadHead][lineReadHead]));
 }
@@ -87,16 +87,14 @@ struct matrix moveLine(struct matrix a, int lineReadHead) {
 
 }
 
-struct matrix UTM(struct matrix a, bool interuptOn) {             // Upper-triangular-matrix function.
+struct matrix UTM(struct matrix a, bool interuptOn) {   // Upper-triangular-matrix function.
     int numOfLoops = 0;
     Start:
     for (int i = 0; i < a.sizeY; i++) {         // ReadHead
-        printMatrix(a);
         if (check(a, i, i) == 1) {
             for (int j = i + 1; j < a.sizeX; j++) {    //NullHead.
                 double coef = findCoef(a, j, i);
                 a = zeroingElement(a, j, i, coef);
-                printMatrix(a);
             }
         } else {
             numOfLoops++;
@@ -106,7 +104,7 @@ struct matrix UTM(struct matrix a, bool interuptOn) {             // Upper-trian
             } else{
                 if(interuptOn){
                     cout << "Given matrix is singular!" << endl;
-                    exit(2);
+                    exit(4);
                 } else{
                     return a;
                 }
@@ -114,14 +112,6 @@ struct matrix UTM(struct matrix a, bool interuptOn) {             // Upper-trian
         }
     }
     return a;
-}
-
-double determinant(struct matrix UTMMatrix){
-    double det = 1;
-    for (int i = 0; i < UTMMatrix.size; i++){
-        det = det * UTMMatrix.array[i][i];
-    }
-    return det;
 }
 
 bool checkMatrix(struct matrix UTMMatrix){

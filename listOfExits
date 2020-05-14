@@ -1,0 +1,74 @@
+
+1:
+
+struct matrix readGeneralMatrix(int size, string path) {
+    struct matrix a;
+    a.size = size;
+    a.sizeX = size;
+    int x;
+    ifstream inFile;
+    inFile.open(path);
+    if (!inFile.is_open()) {
+        cout << "Unable to open file";
+        exit(1);
+    }
+
+2:
+
+struct matrix readMatrix(int size, string path1) {
+    struct matrix a;
+    a.size = size;
+    a.sizeY = size;
+    a.sizeX = size;
+    int x;
+    ifstream inFile;
+    inFile.open(path1);
+    if (!inFile.is_open()) {
+        cout << "Unable to open file";
+        exit(2); // terminate with error
+    }
+
+3:
+
+struct vector vectorAddVector(struct vector a, struct vector b){
+    struct vector c;
+    if(a.size == b.size){
+        c.size = a.size;
+        for (int i = 0; i < a.size; ++i) {
+            c.array[i] = a.array[i] + b.array[i];
+        }
+        return c;
+    }
+    else {
+        exit(3);
+    }
+}
+
+4:
+
+struct matrix UTM(struct matrix a, bool interuptOn) {   // Upper-triangular-matrix function.
+    int numOfLoops = 0;
+    Start:
+    for (int i = 0; i < a.sizeY; i++) {         // ReadHead
+        if (check(a, i, i) == 1) {
+            for (int j = i + 1; j < a.sizeX; j++) {    //NullHead.
+                double coef = findCoef(a, j, i);
+                a = zeroingElement(a, j, i, coef);
+            }
+        } else {
+            numOfLoops++;
+            if (checkSingular(numOfLoops, a.sizeX) == 1) {
+                a = moveLine(a, i);
+                goto Start;
+            } else{
+                if(interuptOn){
+                    cout << "Given matrix is singular!" << endl;
+                    exit(4);
+                } else{
+                    return a;
+                }
+            }
+        }
+    }
+    return a;
+}

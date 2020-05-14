@@ -15,10 +15,10 @@ struct matrix{
 
 };
 
-struct matrix readMatrix(int inputDIM, std::string path);       // Load matrix from a file.
+struct matrix readMatrix(int inputDIM, std::string path);   // Load matrix from a file.
 void printMatrix(struct matrix a);
 double determinant(struct matrix a);
-struct matrix UTM(matrix a, bool b);                         // Reduce the matrix to an upper triangular matrix.
+struct matrix UTM(matrix a, bool b);    // Reduce the matrix to an upper triangular matrix.
 bool checkMatrix(struct matrix UTMMatrix);
 double subdeterminant(struct matrix UTMMatrix);
 double cofactor(struct matrix a, int y, int x);

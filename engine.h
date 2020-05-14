@@ -6,9 +6,7 @@
 #define GRAM_SCHMIDT_ENGINE_H
 
 double dotProduct(struct matrix Matrix, struct vector  whichOneLeft, struct vector whichOneRight);
+struct matrix GramSchmidt(struct matrix givenMatrix, struct matrix vectorMatrix);
 double sum(struct matrix Matrix, struct vector whichOneGet, struct vector theOneBefore);
-double dotProduct(struct matrix Matrix, struct vector whichOneLeft, struct vector whichOneRight);
-struct vector Gram_Schmidt(struct matrix givenMatrix, struct vector insteadOf, struct vector theOneBefore, int whichOne);
-
 
 #endif //GRAM_SCHMIDT_ENGINE_H
